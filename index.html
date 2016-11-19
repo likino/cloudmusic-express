@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue音乐</title>
+</head>
+<body>
+  <h1>Vue音乐</h1>
+  <div id="player">
+    <audio id="audio" src="http://m2.music.126.net/y5U0aj7E8ZKJAg_RtZoT6g==/2015404813715112.mp3" autoplay></audio>
+    <a href="#"><img src="" alt=""></a>
+    <button @click="pause">暂停</button>
+    <button @click="play">播放</button>
+    
+  </div>
+  <script src="./static/js/vue.min.js"></script>
+  <script>
+    var musicList = new Vue({
+      el: '#music-list',
+      data: {
+        musics: [
+          {name: 'K歌之王'},
+          {name: '西湖'},
+          {name: '南方姑娘'},
+        ]
+      }
+    })
+
+    var player = new Vue({
+      el: '#player',
+      methods: {
+        play() {
+          var audio = document.getElementById('audio')
+          if(audio.paused){
+            audio.play()
+          }
+        },
+        pause() {
+          var audio = document.getElementById('audio')
+          if(!audio.paused){
+            audio.pause()
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>
