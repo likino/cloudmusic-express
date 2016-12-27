@@ -1,18 +1,28 @@
-const api = require('NeteaseCloudMusicApi').api
+var express = require('express');
+var app = express();
 
-// api.search('晴天', (data) => {
-//   var musics = JSON.parse(data)
+// 静态
+app.use(express.static('./web'));
 
-//   console.log(musics)
-// })
+var search = require('./routes/search');
+var song = require('./routes/song');
 
-function song(id) {
-  return api.song(id, data => {
-      var mp3 = JSON.parse(data)
-      console.log(mp3.songs[0])
-      return mp3.songs[0]
-  })
-}
+// 跨域
+// app.all('*', function(req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "X-Requested-With");
+//     res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+//     res.header("X-Powered-By",' 3.2.1')
+//     res.header("Content-Type", "application/json;charset=utf-8");
+//     next();
+// });
 
-song(4224657)
-// console.log(song(4224657))
+app.use('/search', search);
+app.use('/song', song);
+
+var server = app.listen(3000, function () {
+  var host = server.address().address;
+  var port = server.address().port;
+
+  console.log('Example app listening at http://%s:%s', host, port);
+});
