@@ -1,9 +1,9 @@
-var express = require('express');
-var router = express.Router();
-var api = require('NeteaseCloudMusicApi').api;
+const express = require('express');
+const router = express.Router();
+const api = require('NeteaseCloudMusicApi').api;
 
 /* 搜索功能 */
-router.get('/:id', function(req, res, next) {
+router.get('/:id', (req, res, next) => {
   api.song(req.params.id, (data) => {
     var song = JSON.parse(data)
     res.send(song);
